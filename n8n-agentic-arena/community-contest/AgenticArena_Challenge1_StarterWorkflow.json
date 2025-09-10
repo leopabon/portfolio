@@ -1,0 +1,409 @@
+{
+  "name": "Challenge 1 – Community Edition",
+  "nodes": [
+    {
+      "parameters": {
+        "operation": "checkIfEvaluating"
+      },
+      "type": "n8n-nodes-base.evaluation",
+      "typeVersion": 4.7,
+      "position": [
+        80,
+        288
+      ],
+      "id": "9535dc0c-4811-412d-abb0-5095ef587e98",
+      "name": "Only if we are evaluating"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "91a79047-f1c3-4b16-921e-0c8a45c43320",
+              "name": "chatInput",
+              "value": "={{ $json.question }}",
+              "type": "string"
+            },
+            {
+              "id": "56cb3f48-70b0-4737-b4cd-8563fdd28455",
+              "name": "sessionId",
+              "value": "=pureEval-{{ Math.round(Math.random()*1000) }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -1424,
+        464
+      ],
+      "id": "77978612-c83c-49f0-b322-14a06404f9f0",
+      "name": "Eval Input"
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1D1P_B70KYuzLXVhSFGd6t19Q2u7msEenvhUqajwLw7k",
+          "mode": "list",
+          "cachedResultName": "Agentic Arena Dev Eval – Challenge 1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1D1P_B70KYuzLXVhSFGd6t19Q2u7msEenvhUqajwLw7k/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1D1P_B70KYuzLXVhSFGd6t19Q2u7msEenvhUqajwLw7k/edit#gid=0"
+        },
+        "limitRows": true
+      },
+      "type": "n8n-nodes-base.evaluationTrigger",
+      "typeVersion": 4.6,
+      "position": [
+        -1632,
+        464
+      ],
+      "id": "c3d6eedd-af17-41f8-815e-3021e59c5e64",
+      "name": "Eval Set",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "9pN5ofUls6mTaOPT",
+          "name": "Geckse Sheets"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "## Eval for Correctness",
+        "height": 560,
+        "width": 1024,
+        "color": 4
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        0,
+        0
+      ],
+      "typeVersion": 1,
+      "id": "2932dfa8-cd9b-40be-9517-7d3fbba0da3c",
+      "name": "Sticky Note3"
+    },
+    {
+      "parameters": {
+        "content": "## Eval Input\n\nCorrect the _Set-Node_ directly to your Agent, once done",
+        "height": 288,
+        "width": 656,
+        "color": 4
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -1680,
+        352
+      ],
+      "typeVersion": 1,
+      "id": "3e0865d4-48cf-4d1e-928b-ec511df8e3b7",
+      "name": "Sticky Note4"
+    },
+    {
+      "parameters": {
+        "message": "={{ $json.output }}",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chat",
+      "typeVersion": 1,
+      "position": [
+        320,
+        384
+      ],
+      "id": "32b0aad1-00b0-4eb6-a7f6-1b1048ed29c8",
+      "name": "Respond to Chat"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "9eab8192-200a-4520-afe9-b13c14cd000c",
+              "leftValue": "={{ $json.chatInput }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.filter",
+      "typeVersion": 2.2,
+      "position": [
+        -1216,
+        464
+      ],
+      "id": "cfa97a2a-4337-43c7-95de-5d4648191da8",
+      "name": "Filter Empty Rows"
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1D1P_B70KYuzLXVhSFGd6t19Q2u7msEenvhUqajwLw7k",
+          "mode": "list",
+          "cachedResultName": "Agentic Arena Dev Eval – Challenge 1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1D1P_B70KYuzLXVhSFGd6t19Q2u7msEenvhUqajwLw7k/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1D1P_B70KYuzLXVhSFGd6t19Q2u7msEenvhUqajwLw7k/edit#gid=0"
+        },
+        "outputs": {
+          "values": [
+            {
+              "outputName": "correctness",
+              "outputValue": "={{ $json.Correctness }}"
+            },
+            {
+              "outputName": "agent answer",
+              "outputValue": "={{ $('Agent Output').item.json.output }}"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.evaluation",
+      "typeVersion": 4.7,
+      "position": [
+        784,
+        192
+      ],
+      "id": "6623a135-bcb0-40d7-a676-de807badafbd",
+      "name": "Save Eval",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "9pN5ofUls6mTaOPT",
+          "name": "Geckse Sheets"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [
+        -176,
+        288
+      ],
+      "id": "7185b1a5-3c61-45cf-9564-6fe00323f7a6",
+      "name": "Agent Output",
+      "notesInFlow": true,
+      "notes": "Agent Answer => \"json.output\""
+    },
+    {
+      "parameters": {
+        "operation": "setMetrics",
+        "expectedAnswer": "={{ $('Eval Set').item.json.answer }}",
+        "actualAnswer": "={{ $json.output || \"No output provided.\" }}",
+        "prompt": "You are an expert factual evaluator assessing the accuracy of answers compared to established ground truths.\n\nEvaluate the factual correctness of a given output compared to the provided ground truth on a scale from 1 to 5. Use detailed reasoning to thoroughly analyze all claims before determining the final score.\n\n# Scoring Criteria\n\n- 5: Highly similar - The output and ground truth are nearly identical, with only minor, insignificant differences.\n- 4: Somewhat similar - The output is largely similar to the ground truth but has few noticeable differences.\n- 3: Moderately similar - There are some evident differences, but the core essence is captured in the output.\n- 2: Slightly similar - The output only captures a few elements of the ground truth and contains several differences.\n- 1: Not similar - The output is significantly different from the ground truth, with few or no matching elements.\n- 0: Not similar at all – The outpus is completely different from the ground truth or not provided. Like nothings is matching.\n\nEvery correct Citation (ideally exact) inside of the Output that matches the provided ground truth is a strong boost for a good score. Also important: A Citation DOES NOT require to be in square brackets. Correct Text is perfectly fine.\n\n# Evaluation Steps\n\n1. Identify and list the key elements present in both the output and the ground truth.\n2. Compare these key elements to evaluate their similarities and differences, considering both content and structure.\n3. Analyze the semantic meaning conveyed by both the output and the ground truth, noting any significant deviations.\n4. Consider factual accuracy of specific details, including names, dates, numbers, and relationships.\n5. Assess whether the output maintains the factual integrity of the ground truth, even if phrased differently.\n6. Determine the overall level of similarity and accuracy according to the defined criteria.\n7. Check if the Citation of Source is provided and matches the original source of the ground truth.\n\n# Output Format\n\nProvide:\n- A detailed analysis of the comparison (extended reasoning)\n- A one-sentence summary highlighting key differences (not similarities)\n- The final similarity score as an integer (0, 1, 2, 3, 4, or 5)\n\nAlways follow the JSON format below and return nothing else:\n{\n  \"extended_reasoning\": \"<detailed step-by-step analysis of factual accuracy and similarity>\",\n  \"reasoning_summary\": \"<one sentence summary focusing on key differences>\",\n  \"score\": <number: integer from 1 to 5>,\n  \"expected_citation\": \"<exact correct citation of the source like in expected answer>\",\n}\n\n# Examples\n\n**Example 1:**\n\nInput:\n- Output: \"The cat sat on the mat.\"\n- Ground Truth: \"The feline is sitting on the rug.\"\n\nExpected Output:\n{\n  \"extended_reasoning\": \"I need to compare 'The cat sat on the mat' with 'The feline is sitting on the rug.' First, let me identify the key elements: both describe an animal ('cat' vs 'feline') in a position ('sat' vs 'sitting') on a surface ('mat' vs 'rug'). The subject is semantically identical - 'cat' and 'feline' refer to the same animal. The action is also semantically equivalent - 'sat' and 'sitting' both describe the same position, though one is past tense and one is present continuous. The location differs in specific wording ('mat' vs 'rug') but both refer to floor coverings that serve the same function. The basic structure and meaning of both sentences are preserved, though they use different vocabulary and slightly different tense. The core information being conveyed is the same, but there are noticeable wording differences.\",\n  \"reasoning_summary\": \"The sentences differ in vocabulary choice ('cat' vs 'feline', 'mat' vs 'rug') and verb tense ('sat' vs 'is sitting').\",\n  \"score\": 3\n}\n\n**Example 2:**\n\nInput:\n- Output: \"The quick brown fox jumps over the lazy dog.\"\n- Ground Truth: \"A fast brown animal leaps over a sleeping canine.\"\n\nExpected Output:\n{\n  \"extended_reasoning\": \"I need to compare 'The quick brown fox jumps over the lazy dog' with 'A fast brown animal leaps over a sleeping canine.' Starting with the subjects: 'quick brown fox' vs 'fast brown animal'. Both describe the same entity (a fox is a type of animal) with the same attributes (quick/fast and brown). The action is described as 'jumps' vs 'leaps', which are synonymous verbs describing the same motion. The object in both sentences is a dog, described as 'lazy' in one and 'sleeping' in the other, which are related concepts (a sleeping dog could be perceived as lazy). The structure follows the same pattern: subject + action + over + object. The sentences convey the same scene with slightly different word choices that maintain the core meaning. The level of specificity differs slightly ('fox' vs 'animal', 'dog' vs 'canine'), but the underlying information and imagery remain very similar.\",\n  \"reasoning_summary\": \"The sentences use different but synonymous terminology ('quick' vs 'fast', 'jumps' vs 'leaps', 'lazy' vs 'sleeping') and varying levels of specificity ('fox' vs 'animal', 'dog' vs 'canine').\",\n  \"score\": 4\n}\n\n# Notes\n\n- Focus primarily on factual accuracy and semantic similarity, not writing style or phrasing differences.\n- Identify specific differences rather than making general assessments.\n- Pay special attention to dates, numbers, names, locations, and causal relationships when present.\n- Consider the significance of each difference in the context of the overall information.\n- Be consistent in your scoring approach across different evaluations.\n- Value the Citation if correct. False Citation is a negative factor. A missing Citation is strong negative factor.",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.evaluation",
+      "typeVersion": 4.7,
+      "position": [
+        432,
+        192
+      ],
+      "id": "fd65e6cc-378a-433c-b1b4-aa5f2b6d0698",
+      "name": "Run Evaluation"
+    },
+    {
+      "parameters": {
+        "content": "## Hook up your own GSheet for saving Outputs"
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        816,
+        64
+      ],
+      "typeVersion": 1,
+      "id": "40475e3f-68eb-4e3f-9319-fb9f94708e07",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "value": "gpt-4.1",
+          "mode": "list",
+          "cachedResultName": "gpt-4.1"
+        },
+        "options": {
+          "responseFormat": "json_object",
+          "temperature": 0.1
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        576,
+        400
+      ],
+      "id": "ed65e476-9ca2-48c2-ad66-e69672e0b67e",
+      "name": "LLM as a Judge",
+      "credentials": {
+        "openAiApi": {
+          "id": "IXK2TqjI91YAEBGR",
+          "name": "OpenAi account"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.noOp",
+      "name": "Work your Magic here",
+      "typeVersion": 1,
+      "position": [
+        -608,
+        288
+      ],
+      "id": "eb8cdb7c-0fe5-43fe-ab8f-bf7547f15b99"
+    },
+    {
+      "parameters": {
+        "content": "## Do not touch this!\n\n![I see you](https://cloud.let-the-work-flow.com/workflow-data/eval-emoji-72.png)\nSincerely,\n_Pure Eval_",
+        "height": 224,
+        "color": 3
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        736,
+        432
+      ],
+      "typeVersion": 1,
+      "id": "986fd94d-29ba-45f2-b829-e648862741b6",
+      "name": "Sticky Note1"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Only if we are evaluating": {
+      "main": [
+        [
+          {
+            "node": "Run Evaluation",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Respond to Chat",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Eval Input": {
+      "main": [
+        [
+          {
+            "node": "Filter Empty Rows",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Eval Set": {
+      "main": [
+        [
+          {
+            "node": "Eval Input",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Filter Empty Rows": {
+      "main": [
+        [
+          {
+            "node": "Work your Magic here",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Agent Output": {
+      "main": [
+        [
+          {
+            "node": "Only if we are evaluating",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Run Evaluation": {
+      "main": [
+        [
+          {
+            "node": "Save Eval",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "LLM as a Judge": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Run Evaluation",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Work your Magic here": {
+      "main": [
+        [
+          {
+            "node": "Agent Output",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "9c028321-eb6d-4f40-9572-0a5cddfdf723",
+  "meta": {
+    "instanceId": "ecec1cfe760b632dcb0132ecf2ac7c047c6f290f3f4a5640e2e2466f0269ccaf"
+  },
+  "id": "uKKA6a4foxSDXCQW",
+  "tags": []
+}
